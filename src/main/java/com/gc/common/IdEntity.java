@@ -7,9 +7,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@SuppressWarnings("serial")
+import org.hibernate.annotations.GenericGenerator;
+
 public abstract class IdEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6743002931682238932L;
+	
 	protected Long id;
 
 	/**
@@ -23,14 +29,10 @@ public abstract class IdEntity implements Serializable {
 					allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.TABLE,generator="A_ID_GENERATOR")
 	 */
-	/*@Id
+	@Id
 	@Column(name="Id", length=25)
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "TimeIDGenerator")
-	@GenericGenerator(name = "TimeIDGenerator", strategy = "com.gc.entity.TimeIDGenerator")*/
-	
-	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+	@GenericGenerator(name = "TimeIDGenerator", strategy = "com.gc.common.TimeIDGeneratorLong")
 	public Long getId() { 
 		return id;
 	}
