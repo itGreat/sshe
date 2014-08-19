@@ -2,38 +2,20 @@ package com.gc.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author gongchang 描述： 时间：2014年7月12日 下午10:23:15
  */
 @Entity
 @Table(name = "t_user")
-public class User {
+public class User extends ID{
 
 	private String name;
 	private String username;
 	private String password;
 
-	private String id;
-
-	@Id
-	/*@GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid")*/
-	@Column(name = "id", insertable = true, updatable = true, nullable = false)
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	@Column
+	@Column(length=100)
 	public String getName() {
 		return name;
 	}
@@ -42,7 +24,7 @@ public class User {
 		this.name = name;
 	}
 
-	@Column
+	@Column(length=100)
 	public String getUsername() {
 		return username;
 	}
@@ -51,7 +33,7 @@ public class User {
 		this.username = username;
 	}
 
-	@Column
+	@Column(length=100)
 	public String getPassword() {
 		return password;
 	}
