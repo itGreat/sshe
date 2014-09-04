@@ -1,4 +1,4 @@
-package com.gc.service.impl;
+package com.gc.sys.service.impl;
 
 public interface IUserService {
 

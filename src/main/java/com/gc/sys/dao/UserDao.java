@@ -1,6 +1,6 @@
-package com.gc.dao;
+package com.gc.sys.dao;
 
-import com.gc.dao.impl.IUserDao;
+import com.gc.sys.dao.impl.IUserDao;
 
 /**
  * @author gongchang

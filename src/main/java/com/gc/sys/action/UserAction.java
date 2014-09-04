@@ -1,4 +1,4 @@
-package com.gc.action;
+package com.gc.sys.action;
 
 public class UserAction {
 

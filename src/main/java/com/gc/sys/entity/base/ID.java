@@ -1,4 +1,4 @@
-package com.gc.entity;
+package com.gc.sys.entity.base;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

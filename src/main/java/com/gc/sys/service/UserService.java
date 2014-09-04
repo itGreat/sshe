@@ -1,6 +1,6 @@
-package com.gc.service;
+package com.gc.sys.service;
 
-import com.gc.service.impl.IUserService;
+import com.gc.sys.service.impl.IUserService;
 
 /**
  * @author gongchang

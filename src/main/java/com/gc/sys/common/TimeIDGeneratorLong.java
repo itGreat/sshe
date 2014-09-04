@@ -1,4 +1,4 @@
-package com.gc.common;
+package com.gc.sys.common;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
