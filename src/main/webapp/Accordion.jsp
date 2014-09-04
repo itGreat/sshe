@@ -15,7 +15,7 @@
 	<p>Click on panel header to show its content.</p>
 	<div style="margin:20px 0 10px 0;"></div>
 	<div class="easyui-accordion" style="width:500px;height:300px;">
-		<div title="About" data-options="iconCls:'icon-ok'"
+		<!-- <div title="About" data-options="iconCls:'icon-ok'"
 			style="overflow:auto;padding:10px;">
 			<h3 style="color:#0099FF;">Accordion for jQuery</h3>
 			<p>Accordion is a part of easyui framework for jQuery. It lets
@@ -30,7 +30,7 @@
 				by specifying a 'href' property. Users can define a panel to be
 				selected. If it is not specified, then the first panel is taken by
 				default.</p>
-		</div>
+		</div> -->
 		<div title="TreeMenu" data-options="iconCls:'icon-search'"
 			style="padding:10px;">
 			<ul class="easyui-tree">
