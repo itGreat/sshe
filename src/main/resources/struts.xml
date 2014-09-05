@@ -26,6 +26,9 @@
 	<constant name="struts.tag.altSyntax" value="true" />
 	<!-- 对于WebLogic,Orion,OC4J此属性应该设置成true -->
 	<constant name="struts.dispatcher.parametersWorkaround" value="false" />
+	
+	<!-- 结果资源所在路径 -->
+	<constant name="struts.convention.result.path" value="/WEB-INF/views/"/>
 
 	<package name="basePackage" extends="struts-default">
 	</package>

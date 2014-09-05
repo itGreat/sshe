@@ -1,7 +1,9 @@
 package com.gc.sys.action;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -13,37 +15,53 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @SuppressWarnings("serial")
 @Namespace(value="/sys")
+@ParentPackage(value="basePackage")
 public class LoginAction extends ActionSupport{
 	
 	private String username;
 	private String password;
 	
 	
-	@Action(value="index",results={
-		@Result(name=SUCCESS,location="index.jsp"),
-		@Result(name="login",location="login.action"),
-	})
+	/**
+	 * @author gongchang
+	 * 功能：跳转后台首页
+	 * 时间：2014年9月5日 下午3:54:32
+	 */
+	@Action(value="index",results={ @Result(name=SUCCESS,location="index.jsp") })
 	public String index(){
-		
 		return SUCCESS;
 	}
 	
-	@Action(value="login",results={
-			@Result(name=SUCCESS,location="index.jsp"),
-			@Result(name="login",location="tologin.action"),
+	/**
+	 * @author gongchang
+	 * 功能：验证登录信息
+	 * 时间：2014年9月5日 下午3:54:48
+	 */
+	@Action(value="checklogin",results={
+			@Result(name=SUCCESS,type="redirect",location="index.action"),
+			@Result(name=LOGIN,type="redirect",location="login.action"),
 		})
-	public String login(){
-		
-		return null;
+	public String cklogin(){
+		 String _username = "admin";
+		 String _password = "admin";
+		 if(StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(password)){
+			 if(username.equals(_username) && password.equals(_password)){
+				 return SUCCESS;
+			 }else{
+				 return LOGIN;
+			 }
+		 }
+		return LOGIN;
 	}
 	
-	@Action(value="login",results={
-			@Result(name=SUCCESS,location="index.jsp"),
-			@Result(name="login",location="login.jsp"),
-		})
-	public String tologin(){
-		
-		return null;
+	/**
+	 * @author gongchang
+	 * 功能：跳转登录页面
+	 * 时间：2014年9月5日 下午3:55:07
+	 */
+	@Action(value="login",results={ @Result(name=SUCCESS,location="login.jsp") })
+	public String login(){
+		return SUCCESS;
 	}
 	
 	public String getUsername() {
