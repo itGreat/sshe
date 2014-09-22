@@ -31,6 +31,15 @@
 	<constant name="struts.convention.result.path" value="/WEB-INF/views/"/>
 
 	<package name="basePackage" extends="struts-default">
+		<global-results>
+			<result name="exception">/WEB-INF/views/exception.jsp</result>
+			<result name="input">/WEB-INF/views/debug.jsp</result>
+			<result name="message">/WEB-INF/views/common/message.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
 	</package>
 
 </struts>
