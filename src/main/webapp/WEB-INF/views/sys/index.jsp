@@ -43,8 +43,6 @@
  <script type="text/javascript">
  var ctx = "${ctx}";
  
- 
- 
  function addTab(title,html){
 	 $('#js_sys_tabs').tabs('add',{
 		 title:title,

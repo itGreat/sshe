@@ -19,14 +19,15 @@ $(function(){
 		var data = {"deptId":deptId} ;
    	    $.post(url,data,function(result){
    	    	openDialog('添加用户',result,400,500);
-    	},'html'); 
+    	},'html');
 	});
 	
 	//打开添加部门窗口
 	$("#js_adddept_btn").click(function(){
 		var node = $('#js_ud_tree').tree('getSelected');
 		var url = ctx+"/sys/userdept/dept_input.action";
-    	var data = {"parentId":node.id};
+		var parentId = !!node ? node.id : null;
+    	var data = {"parentId":parentId};
    	    $.post(url,data,function(result){
    	    	openDialog('添加部门',result,400,500);
     	},'html'); 
@@ -98,10 +99,10 @@ $(function(){
 		refreshUsers();
 	});
     
-	$("#js_demo_btn").click(function(){
+	/*$("#js_demo_btn").click(function(){
 		var url = ctx+"/sys/comm/radio_dept.action";
 		$("#js_dept_dialog").dialog({
-	        title: 'My Dialog',
+	        title: '',
 	        width: 400,
 	        height: 200,
 	        closed: false,
@@ -110,7 +111,7 @@ $(function(){
 	        modal: true
 	        });
 		$("#js_dept_dialog").dialog('refresh', url);
-	});
+	});*/
 	
 	/*$(".js_edit_user").click(function(){
 		alert("js_edit_user");
@@ -125,6 +126,11 @@ $(function(){
 		
 	});*/
 });
+
+function radioDeptCallBack(deptid,deptname){
+	$("#deptid").val(deptid);
+	$("#deptname").val(deptname);
+}
 
 function refreshUsers(){
 	var param = $("#js_search_fm").serialize();

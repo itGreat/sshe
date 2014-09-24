@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/include.jsp" %>
 <%-- <link href="${ctx}/css/sys/table.css" rel="stylesheet" type="text/css"></link> --%>
+
+
 <form id="js_savedept_fm" method="post" action="${ctx}/sys/userdept/dept_save.action">
 	<input type="hidden" name="dept.id" value="${dept.id }"/>
 	<table id="edit_dept_tb" class="css_fm_tb">
       <tr class="table_row3">
         <td class="css_td_label" align="right">上级部门：</td>
         <td class="css_td_el" align="left">
-        	<input id="deptparentid" type="hidden" name="dept.parent.id"  value="${dept.parent.id }" style="width:80%">
-	      	<input id="deptparentname" type="text" value="${dept.parent.name }" />
+        	<input id="deptid" type="hidden" name="dept.parent.id"  value="${dept.parent.id }" style="width:80%">
+	      	<input id="deptname" type="text" value="${dept.parent.name }" onclick="openRadioDept();"/>
         </td>
       <tr class="table_row3">
         <td class="css_td_label" align="right">部门名称：</td>

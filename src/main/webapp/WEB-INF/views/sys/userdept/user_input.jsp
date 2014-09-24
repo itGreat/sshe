@@ -27,7 +27,7 @@
 	        	<td class="css_td_label" align="right">所属部门：</td>
 		        <td class="css_td_el" align="left">
 		        	<input id="deptid" type="hidden" name="user.dept.id" value="${user.dept.id }"><%--${user.dept.id }  ${user.dept.name }--%>
-		        	<input id="deptname" type="text" value="${user.dept.name }" readonly="readonly">
+		        	<input id="deptname" type="text" value="${user.dept.name }" readonly="readonly" onclick="openRadioDept();">
 		        </td>
 	       </tr>
 			<tr class="table_row3">

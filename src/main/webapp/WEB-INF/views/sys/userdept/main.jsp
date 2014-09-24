@@ -5,9 +5,9 @@
 <style type="text/css">
 
 </style>
-<div id="js_ud_dialog" style="display: none;"  data-options="iconCls:'icon-save',resizable:true,modal:true">Dialog Content.</div>
-<div id="js_dept_dialog" style="display: none;"></div>
-	<%-- 部门树 --%>
+<div id="js_ud_dialog" style="display: none;"  data-options="iconCls:'icon-save',resizable:true,modal:true"></div>
+<jsp:include page="../comm/radio_dept.jsp"/>
+<%-- 部门树 --%>
 <div class="div_left">
 	<div class="css_title">部门树</div>
      <ul id="js_ud_tree" class="easyui-tree">
@@ -29,7 +29,7 @@
         <input id="js_editdept_btn" type="button" value="编辑部门">
         <input id="js_deldept_btn" type="button" value="删除部门">
         <input id="js_adduser_btn" type="button" value="新增用户">
-         <input id="js_demo_btn" type="button" value="demo">
+         <input id="js_demo_btn" type="button" value="demo" onclick="openRadioDept();">
 	</div>
 	<div class="listBox"  style="width:100%">
 	<table id="js_user_tb"></table>
