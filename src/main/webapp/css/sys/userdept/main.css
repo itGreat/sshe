@@ -1,0 +1,29 @@
+.div_left{
+ 	width: 225px;
+ 	height: 100%;
+ 	border: 1px solid red;
+	float: left;
+}
+.div_left .css_title{
+	background-color: #106DCD;
+    color: white;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    font: normal bold 14px arial,sans-serif;
+}
+.div_right{
+ 	height: 100%;
+ 	border: 1px solid green;
+ 	margin-left: 230px !important;
+}
+.div_criteria{
+	border: 1px solid blue;
+	padding-top:5px;
+	height: 30px;
+}
+.div_btn{
+	border: 1px solid grey;
+	padding-top:5px;
+	height: 30px;
+}

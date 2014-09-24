@@ -5,9 +5,11 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -36,6 +38,11 @@ public class User extends UndeleteEntity{
 	 * 密码
 	 */
 	private String password;
+	
+	/**
+	 * 所属部门
+	 */
+	private Dept dept;
 	
 	/**
 	 * 拥有角色
@@ -81,6 +88,16 @@ public class User extends UndeleteEntity{
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="dept_id")
+	public Dept getDept() {
+		return dept;
+	}
+
+	public void setDept(Dept dept) {
+		this.dept = dept;
 	}
 
 }

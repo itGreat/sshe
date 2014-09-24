@@ -99,7 +99,7 @@ public class Node extends ID{
 		this.children = children;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="entity_id")
 	public Entity getEntity() {
 		return entity;

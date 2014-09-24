@@ -17,6 +17,7 @@ import com.gc.sys.dao.IBaseDao;
  * 描述：
  * 时间：2014年9月6日 下午10:46:21
  */
+@SuppressWarnings("unchecked")
 @Repository
 public class BaseDaoImpl<T> implements IBaseDao<T>{
 	
@@ -40,8 +41,9 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 		return this.getCurrentSession().save(o);
 	}
 
+	
 	@Override
-	public T get(String hql) {
+	public T getByHql(String hql) {
 		Query q = this.getCurrentSession().createQuery(hql);
 		List<T> l = q.list();
 		if (l != null && l.size() > 0) {
@@ -51,7 +53,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 	}
 
 	@Override
-	public T get(String hql, Map<String, Object> params) {
+	public T getByHql(String hql, Map<String, Object> params) {
 		Query q = this.getCurrentSession().createQuery(hql);
 		if (params != null && !params.isEmpty()) {
 			for (String key : params.keySet()) {
@@ -129,5 +131,10 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 			}
 		}
 		return (Long) q.uniqueResult();
+	}
+
+	@Override
+	public T get(Serializable id) {
+		return null;
 	}
 }

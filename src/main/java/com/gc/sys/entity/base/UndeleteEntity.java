@@ -18,12 +18,12 @@ public class UndeleteEntity extends ID{
 	/**
 	 * 未删除
 	 */
-	public final static Integer NOT_DELETED = 0;
+	public final static Integer UN_DELETE = 0;
 
 	/**
 	 * 是否删除
 	 */
-	private Integer deleted;
+	private Integer deleted = UN_DELETE;
 
 	@Column(length=2)
 	public Integer getDeleted() {

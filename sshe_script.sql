@@ -20,7 +20,7 @@ INSERT INTO t_sys_user(id,deleted,NAME,PASSWORD,username) VALUES ('3',0,'fly','1
 INSERT INTO sshe.t_sys_dept (id, CODE, NAME, remark, parent_id	)VALUES	('1', '01', '开发部', 'remark', NULL);
 INSERT INTO sshe.t_sys_dept (id, CODE, NAME, remark, parent_id	)VALUES	('2', '02', '设计部', 'remark', NULL);
 INSERT INTO sshe.t_sys_dept (id, CODE, NAME, remark, parent_id	)VALUES	('3', '03', '销售部', 'remark', NULL);
-
+INSERT INTO sshe.t_sys_dept (id, CODE, NAME, remark, parent_id	)VALUES	('4', '04', '公司', 'remark', NULL);
 -- insert entity
 DELETE FROM t_sys_entity
 SELECT * FROM t_sys_entity;
@@ -55,4 +55,36 @@ INSERT INTO t_sys_user_role (user_id,role_id) VALUES ('1','1');
 
 -- 系统管理员
 	
+SELECT t.id FROM t_sys_user t WHERE t.username = 'gongchang' AND t.password = '111111'
+
+SELECT * FROM t_sys_user_role ur WHERE 1=1
+AND ur.user_id = (SELECT t.id FROM t_sys_user t WHERE t.username = 'gongchang' AND t.password = '111111')
+
+SELECT * FROM t_sys_role_entity re WHERE 1=1
+AND re.role_id = (
+	SELECT ur.role_id FROM t_sys_user_role ur WHERE 1=1
+		AND ur.user_id = (SELECT t.id FROM t_sys_user t WHERE t.username = 'gongchang' AND t.password = '111111'))
+
+SELECT * FROM t_sys_role_entity re WHERE 1=1
+AND re.role_id = (
+	SELECT ur.role_id FROM t_sys_user_role ur WHERE 1=1
+		AND ur.user_id = 1)
+
+
+SELECT DISTINCT t.* FROM t_sys_entity t,t_sys_role_entity re,t_sys_user_role ur
+WHERE  ur.role_id = re.role_id AND ur.user_id = 1
+
+SELECT * FROM t_sys_node t WHERE t.parent_id IS NULL
+
+SELECT
+        node0_.id AS id2_,
+        node0_.entity_id AS entity5_2_,
+        node0_.layer AS layer2_,
+        node0_.name AS name2_,
+        node0_.parent_id AS parent6_2_,
+        node0_.seq AS seq2_ 
+    FROM
+        t_sys_node node0_ 
+    WHERE
+        node0_.parent_id IS NULL
 

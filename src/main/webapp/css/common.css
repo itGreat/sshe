@@ -1,0 +1,15 @@
+.css_op_a{
+	text-decoration: none;
+}
+.css_fm_tb{
+	width: 100%;
+}
+..css_fm_tb tr {
+	height: 30px;
+}
+.css_fm_tb .css_td_label{
+	width: 25%;
+}
+.css_fm_tb .css_td_el{
+	width: 75%;
+}

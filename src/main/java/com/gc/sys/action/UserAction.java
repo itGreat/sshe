@@ -9,7 +9,7 @@ import org.apache.struts2.convention.annotation.Namespace;
  * 时间：2014年9月4日 下午4:57:45
  */
 @Action
-@Namespace(value="/sys/user")
+@Namespace(value="/sys/userdept")
 public class UserAction {
 
 	

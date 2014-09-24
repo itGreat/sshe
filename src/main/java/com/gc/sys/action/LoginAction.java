@@ -24,16 +24,6 @@ public class LoginAction extends ActionSupport{
 	
 	/**
 	 * @author gongchang
-	 * 功能：跳转后台首页
-	 * 时间：2014年9月5日 下午3:54:32
-	 */
-	@Action(value="index",results={ @Result(name=SUCCESS,location="index.jsp") })
-	public String index(){
-		return SUCCESS;
-	}
-	
-	/**
-	 * @author gongchang
 	 * 功能：验证登录信息
 	 * 时间：2014年9月5日 下午3:54:48
 	 */

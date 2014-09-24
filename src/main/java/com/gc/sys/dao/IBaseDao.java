@@ -24,6 +24,7 @@ public interface IBaseDao<T> {
 	*/
 	
 	/**/
+	public T get(Serializable id);
 	
 	public Serializable save(T o);
 
@@ -33,9 +34,9 @@ public interface IBaseDao<T> {
 
 	public void saveOrUpdate(T o);
 
-	public T get(String hql);
+	public T getByHql(String hql);
 
-	public T get(String hql, Map<String, Object> params);
+	public T getByHql(String hql, Map<String, Object> params);
 
 	public List<T> find(String hql);
 
