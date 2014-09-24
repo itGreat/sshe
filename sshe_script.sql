@@ -8,6 +8,7 @@ SELECT * FROM t_sys_user;
 SELECT * FROM t_sys_role;
 SELECT * FROM t_sys_entity;
 SELECT * FROM t_sys_dept;
+SELECT * FROM t_sys_dept t WHERE t.id = '40283a8148a561a40148a562d8220000'
 SELECT * FROM t_sys_node;
 
 /***** insert *****/
