@@ -88,3 +88,4 @@ SELECT
     WHERE
         node0_.parent_id IS NULL
 
+/sys/entity/list.action
