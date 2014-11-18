@@ -1,9 +1,11 @@
 package com.gc.sys.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.gc.common.Criteria;
 import com.gc.sys.entity.Entity;
 
 /**
@@ -15,5 +17,9 @@ import com.gc.sys.entity.Entity;
 public interface IEntityDao extends IBaseDao<Entity> {
 
 	List<Entity> findByUid(String id);
+
+	List<Map<String, Object>> loadData();
+
+	List<Map<String, Object>> loadDataByCriteria(Criteria criteria);
 
 }

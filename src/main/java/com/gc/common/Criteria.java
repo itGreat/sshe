@@ -42,6 +42,11 @@ public class Criteria {
 	private String type;
 	
 	/**
+	 * 值
+	 */
+	private String value;
+	
+	/**
 	 * 状态
 	 */
 	private String state;
@@ -121,5 +126,13 @@ public class Criteria {
 
 	public void setDeptId(String deptId) {
 		this.deptId = deptId;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 }

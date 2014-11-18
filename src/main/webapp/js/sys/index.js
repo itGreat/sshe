@@ -11,10 +11,7 @@ $(function(){
     	onClick: function(node){
     		var title = node.text;
 	    	var url = ctx+node.attributes.url;
-	    	var data = {};
-	   	    $.post(url,data,function(result){
-	   	    	addTab(title,result);
-	    	},'html'); 
+	    	openTab(title,url);
     	}
     });
 	 

@@ -12,10 +12,12 @@
 <link href="${ctx}/scripts/jquery-easyui-1.3.1/themes/default/easyui.css" rel="stylesheet" type="text/css"></link>
 <link href="${ctx}/scripts/jquery-easyui-1.3.1/themes/icon.css" rel="stylesheet" type="text/css"></link>
 <link href="${ctx}/css/common.css" rel="stylesheet" type="text/css"></link>
+<link href="${ctx}/css/sys/content.css" rel="stylesheet" type="text/css"></link>
 
 <script src="${ctx}/scripts/jquery-easyui-1.3.1/jquery-1.8.0.min.js" type="text/javascript"></script>
 <script src="${ctx}/scripts/jquery-easyui-1.3.1/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${ctx}/scripts/jquery-easyui-1.3.1/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+<script src="${ctx}/scripts/jqUtil.js" type="text/javascript"></script>
 <script src="${ctx}/js/sys/index.js" type="text/javascript"></script>
 <style type="text/css">
  
@@ -43,19 +45,27 @@
  <script type="text/javascript">
  var ctx = "${ctx}";
  
- function addTab(title,html){
-	 $('#js_sys_tabs').tabs('add',{
-		 title:title,
-		 content:html,
-		 closable:true,
-		 tools:[{
-		 iconCls:'icon-mini-refresh',
-		 handler:function(){
-		 alert('refresh');
-		 }
-		 }]
-		 });
- }
+ function openTab(title,url){
+	 var $tabs = $('#js_sys_tabs');
+	if ($tabs.tabs('exists',title)){
+		$tabs.tabs('select', title);
+	} else {
+    	var data = {};
+   	    $.post(url,data,function(result){
+   	    	$tabs.tabs('add',{
+				title:title,
+				content:result,
+				closable:true,
+				tools:[{
+				iconCls:'icon-mini-refresh',
+				handler:function(){
+				alert('refresh');
+				}
+				}]
+				});
+    	},'html'); 
+	}
+}
  </script>
 </body>
 </html>

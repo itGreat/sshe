@@ -89,3 +89,15 @@ SELECT
         node0_.parent_id IS NULL
 
 /sys/entity/list.action
+
+
+    SELECT
+        entity0_.id AS col_0_0_,
+        entity0_.type AS col_1_0_,
+        entity0_.name AS col_2_0_,
+        entity0_.value AS col_3_0_,
+        entity0_.remark AS col_4_0_ 
+    FROM
+        t_sys_entity entity0_ 
+    ORDER BY
+        entity0_.id DESC

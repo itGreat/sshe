@@ -1,138 +1,111 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/commons/include.jsp"%>
- <table class="easyui-datagrid" title="Basic DataGrid" style="width:700px;height:250px"
-	data-options="singleSelect:true,collapsible:true,url:'datagrid_data1.json',method:'get'">
+<!--  <div id="toolbar">
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加</a> 
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">编辑</a> 
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
+</div> -->
+	<div id="entity_dialog"></div>
+	<div class="div_criteria">
+		<form id="js_criteria_fm" action="">
+			类型：
+			<select name="criteria.type">
+					<option value="menu">menu</option>
+					<option value="other">other</option>
+			</select>
+			名称：
+			<input type="text" name="criteria.name"/>
+			地址：
+			<input type="text" name="criteria.value"/>
+			
+			<input id="js_search_btn" type="button" value="查询"/>
+			<input type="reset" value="重置"/>
+		</form>
+	</div>
+ <table id="entity_list" class="easyui-datagrid" 
+	data-options="ingleSelect:true,collapsible:true,url:'${ctx}/sys/entity/data.action',method:'post',
+	toolbar: [{
+		iconCls: 'icon-add',
+		text:'新增',
+		handler: addEntity
+	},'-',{
+		iconCls: 'icon-edit',
+		text:'编辑',
+		handler: editEntity
+	},'-',{
+		iconCls: 'icon-remove',
+		text:'删除',
+		handler: delEntity
+	}]">
 	<thead>
 		<tr>
-		<th data-options="field:'itemid',width:80">Item ID</th>
-		<th data-options="field:'productid',width:100">Product</th>
-		<th data-options="field:'listprice',width:80,align:'right'">List Price</th>
-		<th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
-		<th data-options="field:'attr1',width:250">Attribute</th>
-		<th data-options="field:'status',width:60,align:'center'">Status</th>
+		<th data-options="field:'type',width:80">类型</th>
+		<th data-options="field:'name',width:200">名称</th>
+		<th data-options="field:'value',width:280">地址</th>
+		<th data-options="field:'remark',width:260">备注</th>
 		</tr>
 	</thead>
 	<tbody>
 	
 	</tbody>
 </table>
-<div id="toolbar">
-	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加</a> 
-	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">编辑</a> 
-	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
-</div>
-<div id="dlg" class="easyui-dialog"
-	style="width: 400px; height: 280px; padding: 10px 20px" closed="true"
-	buttons="#dlg-buttons">
-	<div class="ftitle">User Information</div>
-	<form id="fm" method="post" novalidate>
-		<div class="fitem">
-			<label>First Name:</label> <input name="firstname"
-				class="easyui-textbox" required="true">
-		</div>
-		<div class="fitem">
-			<label>Last Name:</label> <input name="lastname"
-				class="easyui-textbox" required="true">
-		</div>
-		<div class="fitem">
-			<label>Phone:</label> <input name="phone" class="easyui-textbox">
-		</div>
-		<div class="fitem">
-			<label>Email:</label> <input name="email" class="easyui-textbox"
-				validType="email">
-		</div>
-	</form>
-</div>
-<div id="dlg-buttons">
-	<a href="javascript:void(0)" class="easyui-linkbutton c6"
-		iconCls="icon-ok" onclick="saveUser()" style="width: 90px">Save</a> <a
-		href="javascript:void(0)" class="easyui-linkbutton"
-		iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
-		style="width: 90px">Cancel</a>
-</div>
 <script type="text/javascript">
-	var url;
-	function newUser() {
-		$('#dlg').dialog('open').dialog('setTitle', 'New User');
-		$('#fm').form('clear');
-		url = 'save_user.php';
-	}
-	function editUser() {
-		var row = $('#dg').datagrid('getSelected');
-		if (row) {
-			$('#dlg').dialog('open').dialog('setTitle', 'Edit User');
-			$('#fm').form('load', row);
-			url = 'update_user.php?id=' + row.id;
-		}
-	}
-	function saveUser() {
-		$('#fm').form('submit', {
-			url : url,
-			onSubmit : function() {
-				return $(this).form('validate');
-			},
-			success : function(result) {
-				var result = eval('(' + result + ')');
-				if (result.errorMsg) {
-					$.messager.show({
-						title : 'Error',
-						msg : result.errorMsg
-					});
-				} else {
-					$('#dlg').dialog('close'); // close the dialog
-					$('#dg').datagrid('reload'); // reload the user data
-				}
-			}
+	$(function(){
+		$("#js_search_btn").click(function(){
+			var data = $("#js_criteria_fm").serializeJson();
+		    $('#entity_list').datagrid('load',data);
 		});
+	});
+
+	function addEntity(){
+		var url = ctx+"/sys/entity/input.action";
+		openEntityDialog('新增功能',url);
 	}
-	function destroyUser() {
-		var row = $('#dg').datagrid('getSelected');
-		if (row) {
-			$.messager.confirm('Confirm',
-					'Are you sure you want to destroy this user?', function(r) {
-						if (r) {
-							$.post('destroy_user.php', {
-								id : row.id
-							}, function(result) {
-								if (result.success) {
-									$('#dg').datagrid('reload'); // reload the user data
-								} else {
-									$.messager.show({ // show error message
-										title : 'Error',
-										msg : result.errorMsg
-									});
-								}
-							}, 'json');
-						}
-					});
-		}
+	
+	function editEntity(){
+		var id = $('#entity_list').datagrid('getSelected').id || '';
+		var url = ctx+"/sys/entity/input.action?id="+id;
+		openEntityDialog('编辑功能',url);
+	}
+	
+	function delEntity(){
+		var id = $('#entity_list').datagrid('getSelected').id || '';
+		var url = ctx+"/sys/entity/delete.action";
+		var data = {id:id};
+		$.post(url,data,function(result){
+			if(result == '1'){
+				alert('操作成功!');
+				$('#entity_list').datagrid('reload');
+			}else{
+				alert('操作失败!');
+			}
+		},'text');
+	}
+	
+	function openEntityDialog(title,url){
+		$('#entity_dialog').dialog({
+	        title: title,
+	        width: 400,
+	        height: 200,
+	        closed: false,
+	        cache: false,
+	        href: url,
+	        modal: true
+        });
+// 		$('#dd').dialog('refresh', 'new_content.php');
+	}
+	function saveEntity(){
+		var $fm = $("#js_saveentity_fm");
+		var data = $fm.serializeArray();
+		var url = $fm.attr('action');
+	    $.post(url,data,function(result){
+	    	if(result == 1){
+	    		$('#entity_dialog').dialog('close');
+	    		$('#entity_list').datagrid('reload');
+	        }else{
+	            alert("操作失败");
+	        }
+	 	},'text');
 	}
 </script>
-<style type="text/css">
-#fm {
-	margin: 0;
-	padding: 10px 30px;
-}
-
-.ftitle {
-	font-size: 14px;
-	font-weight: bold;
-	padding: 5px 0;
-	margin-bottom: 10px;
-	border-bottom: 1px solid #ccc;
-}
-
-.fitem {
-	margin-bottom: 5px;
-}
-
-.fitem label {
-	display: inline-block;
-	width: 80px;
-}
-
-.fitem input {
-	width: 160px;
-}
-</style>
+ 
