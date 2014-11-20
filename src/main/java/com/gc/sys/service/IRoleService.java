@@ -4,18 +4,17 @@ import java.util.List;
 import java.util.Map;
 
 import com.gc.common.Criteria;
-import com.gc.sys.entity.Node;
+import com.gc.sys.entity.Role;
 
-public interface INodeService {
-
-	String loadTree();
+public interface IRoleService {
 
 	List<Map<String, Object>> loadDataByCriteria(Criteria criteria);
 
-	Node get(String id);
+	Role get(String id);
 
-	void save(Node node);
+	void save(Role role);
 
 	void delete(String id);
-
+	
+	void delete(String[] ids);
 }

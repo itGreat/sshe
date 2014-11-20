@@ -18,7 +18,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.gc.common.Criteria;
 import com.gc.common.CrudActionSupport;
 import com.gc.sys.entity.Entity;
+import com.gc.sys.entity.Node;
 import com.gc.sys.service.IEntityService;
+import com.gc.sys.service.INodeService;
 import com.gc.util.Struts2Utils;
 
 
@@ -28,21 +30,21 @@ import com.gc.util.Struts2Utils;
  * 时间：2014年11月15日 上午10:11:10
  */
 @SuppressWarnings("serial")
-@Namespace(value="/sys/entity")
+@Namespace(value="/sys/node")
 @ParentPackage(value="basePackage")
-public class EntityAction extends CrudActionSupport<Entity>{
+public class NodeAction extends CrudActionSupport<Node>{
 
 	@Autowired
-	private IEntityService entityService;
+	private INodeService nodeService;
 	
 	private String id;
-	private Entity entity;
+	private Node node;
 	
 	private Criteria criteria;
 	
 	@Override
-	public Entity getModel() {
-		return entity;
+	public Node getModel() {
+		return node;
 	}
 	
 	/**
@@ -55,7 +57,7 @@ public class EntityAction extends CrudActionSupport<Entity>{
 		HttpServletResponse response = Struts2Utils.getResponse();
 		response.setContentType("text/html;charset=UTF-8");
 //		List<Map<String,Object>> list = entityService.loadData();
-		List<Map<String,Object>> list = entityService.loadDataByCriteria(criteria);
+		List<Map<String,Object>> list = nodeService.loadDataByCriteria(criteria);
 		Map<String,Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("rows", list);
 		String jsonString = JSONObject.toJSONString(dataMap);
@@ -64,16 +66,16 @@ public class EntityAction extends CrudActionSupport<Entity>{
 	}
 
 	@Override
-	@Action(value="list",results={ @Result(name=SUCCESS,location="entity_list.jsp") })
+	@Action(value="list",results={ @Result(name=SUCCESS,location="list.jsp") })
 	public String list() throws Exception {
 		return SUCCESS;
 	}
 
 	@Override
-	@Action(value="input",results={ @Result(name=SUCCESS,location="entity_input.jsp") })
+	@Action(value="input",results={ @Result(name=SUCCESS,location="node_input.jsp") })
 	public String input() throws Exception {
 		if(StringUtils.isNotEmpty(id)){
-			entity = entityService.get(id);
+			node = nodeService.get(id);
 		}
 		return SUCCESS;
 	}
@@ -81,7 +83,7 @@ public class EntityAction extends CrudActionSupport<Entity>{
 	@Override
 	@Action(value="save")
 	public String save() throws Exception {
-		entityService.save(entity);
+		nodeService.save(node);
 		Struts2Utils.getResponse().getWriter().print(1);
 		return null;
 	}
@@ -89,7 +91,7 @@ public class EntityAction extends CrudActionSupport<Entity>{
 	@Override
 	@Action(value="delete")
 	public String delete() throws Exception {
-		entityService.delete(id);
+		nodeService.delete(id);
 		Struts2Utils.getResponse().getWriter().print(1);
 		return null;
 	}
@@ -104,15 +106,7 @@ public class EntityAction extends CrudActionSupport<Entity>{
 		this.id = id;
 	}
 
-
-	public Entity getEntity() {
-		return entity;
-	}
-
-
-	public void setEntity(Entity entity) {
-		this.entity = entity;
-	}
+ 
 
 	public Criteria getCriteria() {
 		return criteria;

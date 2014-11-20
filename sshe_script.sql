@@ -35,11 +35,36 @@ INSERT INTO sshe.t_sys_node (id,layer,NAME,seq,entity_id,parent_id) VALUES ('1',
 INSERT INTO sshe.t_sys_node (id,layer,NAME,seq,entity_id,parent_id) VALUES ('2',0,'功能管理',1,2,NULL);
 INSERT INTO sshe.t_sys_node (id,layer,NAME,seq,entity_id,parent_id) VALUES ('3',0,'菜单管理',1,3,NULL);
 INSERT INTO sshe.t_sys_node (id,layer,NAME,seq,entity_id,parent_id) VALUES ('4',0,'菜单管理',1,4,NULL);
-SELECT * FROM t_sys_node;
 
+INSERT INTO sshe.t_sys_node (id,layer,NAME,seq,entity_id,parent_id) VALUES ('5',0,'角色管理',2,4,NULL);
+SELECT * FROM t_sys_node;
+SELECT * FROM t_sys_entity;
 -- insert role
 INSERT INTO t_sys_role(id,NAME,remark) VALUES ('1','系统管理员',NULL);
 
+SELECT
+        node0_.id AS id2_,
+        node0_.entity_id AS entity5_2_,
+        node0_.layer AS layer2_,
+        node0_.name AS name2_,
+        node0_.parent_id AS parent6_2_,
+        node0_.seq AS seq2_ 
+    FROM
+        t_sys_node node0_ 
+    WHERE
+        node0_.parent_id IS NULL
+        
+        SELECT
+        node0_.id AS id2_,
+        node0_.entity_id AS entity5_2_,
+        node0_.layer AS layer2_,
+        node0_.name AS name2_,
+        node0_.parent_id AS parent6_2_,
+        node0_.seq AS seq2_ 
+    FROM
+        t_sys_node node0_ 
+    WHERE
+        node0_.parent_id ='4'
 
 -- 菜单关联 功能
 -- 角色 管理 功能

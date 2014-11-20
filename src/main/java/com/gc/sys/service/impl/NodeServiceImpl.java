@@ -1,11 +1,13 @@
 package com.gc.sys.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.gc.common.Criteria;
 import com.gc.sys.dao.INodeDao;
 import com.gc.sys.entity.Node;
 import com.gc.sys.service.INodeService;
@@ -19,14 +21,14 @@ import com.gc.sys.service.INodeService;
 public class NodeServiceImpl implements INodeService{
 	
 	@Autowired
-	private INodeDao NodeDao;
+	private INodeDao nodeDao;
 
 	@Override
 	public String loadTree() {
 		String str = null;
 		StringBuffer hql = new StringBuffer();
-		hql.append("select t from Node t where t.parent is null ");
-		List<Node> list = NodeDao.find(hql.toString());
+		hql.append("select t from Node t where t.parent.id is null ");
+		List<Node> list = nodeDao.find(hql.toString());
 		if(!CollectionUtils.isEmpty(list)){
 			StringBuffer buf=new StringBuffer("[");
 			boolean notFirst=false;
@@ -53,7 +55,8 @@ public class NodeServiceImpl implements INodeService{
 		/*String stats = CollectionUtils.isEmpty(node.getChildren()) ? "closed" : "open";
 		buf.append(", \"state\": \""+stats+"\" ");*/
 		buf.append(",\"attributes\":{");
-		buf.append("\"url\" :\""+node.getEntity().getValue()+"\" ");
+		String url = null != node.getEntity() ? node.getEntity().getValue() : "";
+		buf.append("\"url\" :\""+url+"\" ");
 		buf.append("}");
 		return buf.toString();
 	}
@@ -77,5 +80,29 @@ public class NodeServiceImpl implements INodeService{
 			buf.append("]");
 		}
 		return buf.toString();
+	}
+
+	@Override
+	public List<Map<String, Object>> loadDataByCriteria(Criteria criteria) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Node get(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(Node node) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(String id) {
+		// TODO Auto-generated method stub
+		
 	}
 }

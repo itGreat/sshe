@@ -74,8 +74,8 @@ public class EntityDao extends BaseDaoImpl<Entity> implements IEntityDao{
 		}
 		hql.append(" order by t.id desc ");
 		Session session = getCurrentSession();
-		List<Map<String, Object>> list2 = session.createQuery(hql.toString()).list();
-		return list2;
+		List<Map<String, Object>> list = session.createQuery(hql.toString()).list();
+		return list;
 	}
 	
 	public static void main(String[] args) {

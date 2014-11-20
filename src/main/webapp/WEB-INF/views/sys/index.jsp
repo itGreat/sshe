@@ -49,6 +49,11 @@
 	 var $tabs = $('#js_sys_tabs');
 	if ($tabs.tabs('exists',title)){
 		$tabs.tabs('select', title);
+		var tab = $tabs.tabs('getSelected');
+		$tabs.tabs('update', {
+			tab: tab,
+			options: {title: title,href: url}
+		});
 	} else {
     	var data = {};
    	    $.post(url,data,function(result){
@@ -59,7 +64,11 @@
 				tools:[{
 				iconCls:'icon-mini-refresh',
 				handler:function(){
-				alert('refresh');
+					var tab = $tabs.tabs('getSelected');
+					$tabs.tabs('update', {
+						tab: tab,
+						options: {title: title,href: url}
+					});
 				}
 				}]
 				});
