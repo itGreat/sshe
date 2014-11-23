@@ -18,4 +18,6 @@ public interface INodeService {
 
 	void delete(String id);
 
+	List<Map<String, Object>> getNodes();
+
 }

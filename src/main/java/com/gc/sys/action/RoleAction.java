@@ -1,5 +1,6 @@
 package com.gc.sys.action;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.gc.common.Criteria;
 import com.gc.common.CrudActionSupport;
 import com.gc.sys.entity.Role;
+import com.gc.sys.service.INodeService;
 import com.gc.sys.service.IRoleService;
 import com.gc.util.Struts2Utils;
 
@@ -34,6 +36,8 @@ public class RoleAction extends CrudActionSupport<Role>{
 
 	@Autowired
 	private IRoleService roleService;
+	@Autowired
+	private INodeService nodeService;
 	
 	private String id;
 	private String ids;
@@ -98,6 +102,16 @@ public class RoleAction extends CrudActionSupport<Role>{
 		return null;
 	}
 
+	@Action(value="tree")
+	public void tree() throws IOException{
+		HttpServletResponse response = Struts2Utils.getResponse();
+		response.setContentType("text/plain; charset=utf-8"); //指定文本类型
+		PrintWriter out = response.getWriter();
+		String str = nodeService.loadTree();
+		log.info(str);
+		out.print(str);
+		out.close();
+	}
 
 	public String getId() {
 		return id;

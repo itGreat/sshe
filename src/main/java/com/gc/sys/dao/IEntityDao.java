@@ -22,4 +22,6 @@ public interface IEntityDao extends IBaseDao<Entity> {
 
 	List<Map<String, Object>> loadDataByCriteria(Criteria criteria);
 
+	List<Map<String, Object>> loadEntitys();
+
 }

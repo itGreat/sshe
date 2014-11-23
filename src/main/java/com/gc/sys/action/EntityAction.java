@@ -45,6 +45,16 @@ public class EntityAction extends CrudActionSupport<Entity>{
 		return entity;
 	}
 	
+	
+	@Action(value="getEntitys")
+	public void getEntitys()  throws Exception  {
+		HttpServletResponse response = Struts2Utils.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		List<Map<String,Object>> list = entityService.getEntitys();
+		PrintWriter out = response.getWriter();
+		out.print(JSONObject.toJSON(list));
+	}
+	
 	/**
 	 * @author gongchang
 	 * 功能：

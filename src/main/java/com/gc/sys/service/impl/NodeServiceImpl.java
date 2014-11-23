@@ -3,12 +3,15 @@ package com.gc.sys.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.gc.common.Criteria;
+import com.gc.sys.dao.IEntityDao;
 import com.gc.sys.dao.INodeDao;
+import com.gc.sys.entity.Entity;
 import com.gc.sys.entity.Node;
 import com.gc.sys.service.INodeService;
 
@@ -22,6 +25,8 @@ public class NodeServiceImpl implements INodeService{
 	
 	@Autowired
 	private INodeDao nodeDao;
+	@Autowired
+	private IEntityDao entityDao;
 
 	@Override
 	public String loadTree() {
@@ -50,7 +55,7 @@ public class NodeServiceImpl implements INodeService{
 	
 	private String getJsonStr(Node node){
 		StringBuffer buf=new StringBuffer();
-		buf.append("\"id\" : "+node.getId());
+		buf.append("\"id\" : \""+node.getId()+"\" ");
 		buf.append(",\"text\" : \""+node.getName()+"\" ");
 		/*String stats = CollectionUtils.isEmpty(node.getChildren()) ? "closed" : "open";
 		buf.append(", \"state\": \""+stats+"\" ");*/
@@ -84,25 +89,51 @@ public class NodeServiceImpl implements INodeService{
 
 	@Override
 	public List<Map<String, Object>> loadDataByCriteria(Criteria criteria) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Node get(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return nodeDao.get(id);
 	}
 
 	@Override
 	public void save(Node node) {
-		// TODO Auto-generated method stub
+		final boolean isNew = StringUtils.isEmpty(node.getId());
+		//关联功能
+		String entityId = null != node.getEntity() ? node.getEntity().getId() : null; 
+		if(StringUtils.isNotEmpty(entityId)){
+			Entity entity = entityDao.get(entityId);
+			node.setEntity(entity);
+		}
+		//关联上级
+		String parentId = null != node.getParent() ? node.getParent().getId() : null;
+		if(StringUtils.isNotEmpty(parentId)){
+			Node parent = nodeDao.get(parentId);
+			node.setParent(parent);
+		}
 		
+		if(isNew){
+			nodeDao.save(node);
+		}else{
+			Node model = nodeDao.get(node.getId());
+			model.setName(node.getName());
+			model.setLayer(node.getLayer());
+			model.setSeq(node.getSeq());
+			model.setEntity(node.getEntity());
+			model.setParent(node.getParent());
+			nodeDao.update(model);
+		}
 	}
 
 	@Override
 	public void delete(String id) {
-		// TODO Auto-generated method stub
-		
+		Node node = nodeDao.get(id);
+		nodeDao.delete(node);
+	}
+
+	@Override
+	public List<Map<String, Object>> getNodes() {
+		return nodeDao.getNodes();
 	}
 }

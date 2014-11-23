@@ -32,9 +32,7 @@
 		<th data-options="field:'remark',width:260">备注</th>
 		</tr>
 	</thead>
-	<tbody>
 	
-	</tbody>
 </table>
 <script type="text/javascript">
 	$(function(){
@@ -50,8 +48,11 @@
 	}
 	
 	function editRole(){
-		var id = $('#role_list').datagrid('getSelected').id || '';
-		var url = ctx+"/sys/role/input.action?id="+id;
+		var checkeds = $('#role_list').datagrid('getChecked');
+		if(checkeds.length > 1){
+			alert('只能编辑一条!');return;
+		}
+		var url = ctx+"/sys/role/input.action?id="+checkeds[0].id;
 		openRoleDialog('编辑角色',url);
 	}
 	
@@ -61,17 +62,16 @@
 		if(!!!checkeds){
 			alert('请选择需要删除的记录'); return;
 		}
-		var ids = [];
-		for(var i=0;i<checkeds.length;i++){
-			ids[ids.length]  = checkeds[i].id;
+		if(!confirm('确定删除吗?')){
+			return;
 		}
-		ids = ids.join(",");
+		var ids = $(checkeds).map(function(){ return this.id;}).get().join(",");
 		var url = ctx+"/sys/role/delete.action";
 		var data = {ids:ids};
 		$.post(url,data,function(result){
 			if(result == '1'){
-				alert('操作成功!');
 				$('#role_list').datagrid('reload');
+				alert('操作成功!');
 			}else{
 				alert('操作失败!');
 			}
@@ -82,7 +82,7 @@
 		$('#role_dialog').dialog({
 	        title: title,
 	        width: 400,
-	        height: 200,
+	        height: 500,
 	        closed: false,
 	        cache: false,
 	        href: url,

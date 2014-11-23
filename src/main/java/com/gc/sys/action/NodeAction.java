@@ -17,9 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
 import com.gc.common.Criteria;
 import com.gc.common.CrudActionSupport;
-import com.gc.sys.entity.Entity;
 import com.gc.sys.entity.Node;
-import com.gc.sys.service.IEntityService;
 import com.gc.sys.service.INodeService;
 import com.gc.util.Struts2Utils;
 
@@ -39,6 +37,7 @@ public class NodeAction extends CrudActionSupport<Node>{
 	
 	private String id;
 	private Node node;
+	private String parentId;
 	
 	private Criteria criteria;
 	
@@ -46,6 +45,16 @@ public class NodeAction extends CrudActionSupport<Node>{
 	public Node getModel() {
 		return node;
 	}
+	
+	@Action(value="getNodes")
+	public void getEntitys()  throws Exception  {
+		HttpServletResponse response = Struts2Utils.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		List<Map<String,Object>> list = nodeService.getNodes();
+		PrintWriter out = response.getWriter();
+		out.print(JSONObject.toJSON(list));
+	}
+	
 	
 	/**
 	 * @author gongchang
@@ -66,7 +75,7 @@ public class NodeAction extends CrudActionSupport<Node>{
 	}
 
 	@Override
-	@Action(value="list",results={ @Result(name=SUCCESS,location="list.jsp") })
+	@Action(value="list",results={ @Result(name=SUCCESS,location="node_list.jsp") })
 	public String list() throws Exception {
 		return SUCCESS;
 	}
@@ -76,6 +85,12 @@ public class NodeAction extends CrudActionSupport<Node>{
 	public String input() throws Exception {
 		if(StringUtils.isNotEmpty(id)){
 			node = nodeService.get(id);
+		}else{
+			node = new Node();
+			if(StringUtils.isNotEmpty(parentId)){
+				Node parent = nodeService.get(parentId);
+				node.setParent(parent);
+			}
 		}
 		return SUCCESS;
 	}
@@ -114,6 +129,22 @@ public class NodeAction extends CrudActionSupport<Node>{
 
 	public void setCriteria(Criteria criteria) {
 		this.criteria = criteria;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public Node getNode() {
+		return node;
+	}
+
+	public void setNode(Node node) {
+		this.node = node;
 	}
 
 }

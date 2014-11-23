@@ -12,5 +12,7 @@ public interface IEntityService extends IBaseService<Entity>{
 
 	List<Map<String, Object>> loadDataByCriteria(Criteria criteria);
 
+	List<Map<String, Object>> getEntitys();
+
 
 }

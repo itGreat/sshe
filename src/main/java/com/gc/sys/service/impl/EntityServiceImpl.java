@@ -61,6 +61,11 @@ public class EntityServiceImpl implements IEntityService{
 		return entityDao.loadDataByCriteria(criteria);
 	}
 
+	@Override
+	public List<Map<String, Object>> getEntitys() {
+		return entityDao.loadEntitys();
+	}
+
  
 
 }

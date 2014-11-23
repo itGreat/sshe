@@ -77,9 +77,15 @@ public class EntityDao extends BaseDaoImpl<Entity> implements IEntityDao{
 		List<Map<String, Object>> list = session.createQuery(hql.toString()).list();
 		return list;
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(StringUtils.isNotBlank("   "));
+
+	@Override
+	public List<Map<String, Object>> loadEntitys() {
+		StringBuffer hql = new StringBuffer();
+		hql.append(" select new map(t.id as id,t.name as text) from Entity t ");
+		hql.append(" order by t.id desc ");
+		Session session = getCurrentSession();
+		List<Map<String, Object>> list = session.createQuery(hql.toString()).list();
+		return list;
 	}
 
 }

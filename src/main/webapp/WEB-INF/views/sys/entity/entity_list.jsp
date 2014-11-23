@@ -70,6 +70,7 @@
 	}
 	
 	function delEntity(){
+		if(!confirm("确认删除吗?")){return;}
 		var id = $('#entity_list').datagrid('getSelected').id || '';
 		var url = ctx+"/sys/entity/delete.action";
 		var data = {id:id};
