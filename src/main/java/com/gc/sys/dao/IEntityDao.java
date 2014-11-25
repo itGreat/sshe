@@ -24,4 +24,6 @@ public interface IEntityDao extends IBaseDao<Entity> {
 
 	List<Map<String, Object>> loadEntitys();
 
+	List<Entity> findByIds(String[] entityIds);
+
 }

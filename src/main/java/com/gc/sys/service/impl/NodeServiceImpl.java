@@ -55,13 +55,13 @@ public class NodeServiceImpl implements INodeService{
 	
 	private String getJsonStr(Node node){
 		StringBuffer buf=new StringBuffer();
-		buf.append("\"id\" : \""+node.getId()+"\" ");
-		buf.append(",\"text\" : \""+node.getName()+"\" ");
+		buf.append("\"id\":\""+node.getId()+"\"");
+		buf.append(",\"text\":\""+node.getName()+"\"");
 		/*String stats = CollectionUtils.isEmpty(node.getChildren()) ? "closed" : "open";
 		buf.append(", \"state\": \""+stats+"\" ");*/
 		buf.append(",\"attributes\":{");
 		String url = null != node.getEntity() ? node.getEntity().getValue() : "";
-		buf.append("\"url\" :\""+url+"\" ");
+		buf.append("\"url\":\""+url+"\"");
 		buf.append("}");
 		return buf.toString();
 	}

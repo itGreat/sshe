@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
@@ -85,6 +86,18 @@ public class EntityDao extends BaseDaoImpl<Entity> implements IEntityDao{
 		hql.append(" order by t.id desc ");
 		Session session = getCurrentSession();
 		List<Map<String, Object>> list = session.createQuery(hql.toString()).list();
+		return list;
+	}
+
+	@Override
+	public List<Entity> findByIds(String[] entityIds) {
+		StringBuffer hql = new StringBuffer();
+		hql.append(" select t from Entity t where t.id in (:entityIds) ");
+		hql.append(" order by t.id desc ");
+		Session session = getCurrentSession();
+		Query query = session.createQuery(hql.toString());
+		query.setParameterList("entityIds", entityIds);
+		List<Entity> list = query.list();
 		return list;
 	}
 

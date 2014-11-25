@@ -91,7 +91,11 @@
 // 		$('#dd').dialog('refresh', 'new_content.php');
 	}
 	function saveRole(){
+// 		var box = $('#role_box');
 		var $fm = $("#js_saverole_fm");
+		var entityIds = $($("#js_node_tree",$fm).tree('getChecked')).map(function(){return this.id;}).toArray().join(',');
+		var html = "<input type='hidden' name='role.entityIds' value='"+ entityIds +"' />";
+		$fm.append(html);
 		var data = $fm.serializeArray();
 		var url = $fm.attr('action');
 	    $.post(url,data,function(result){

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
 import com.gc.common.Criteria;
 import com.gc.common.CrudActionSupport;
+import com.gc.sys.entity.Entity;
 import com.gc.sys.entity.Role;
 import com.gc.sys.service.INodeService;
 import com.gc.sys.service.IRoleService;
@@ -107,7 +109,12 @@ public class RoleAction extends CrudActionSupport<Role>{
 		HttpServletResponse response = Struts2Utils.getResponse();
 		response.setContentType("text/plain; charset=utf-8"); //指定文本类型
 		PrintWriter out = response.getWriter();
+		Role role = roleService.get(id);
+		Set<Entity> entities = role.getEntities();
 		String str = nodeService.loadTree();
+		for (Entity entity : entities) {
+			str = str.replace("\"id\":\""+entity.getId()+"\"", "\"id\":\""+entity.getId()+"\",\"checked\":true");
+		}
 		log.info(str);
 		out.print(str);
 		out.close();

@@ -6,9 +6,11 @@
 /***** select *****/
 SELECT * FROM t_sys_user;
 SELECT * FROM t_sys_role;
-SELECT * FROM t_sys_entity;
+SELECT * FROM t_sys_entity t WHERE t.id = '1';
 SELECT * FROM t_sys_dept;
 SELECT * FROM t_sys_node;
+
+SELECT * FROM t_sys_role_entity;
 
 /***** insert *****/
 -- insert user
@@ -126,3 +128,4 @@ SELECT
         t_sys_entity entity0_ 
     ORDER BY
         entity0_.id DESC
+SELECT node0_.id AS col_0_0_, node0_.name AS col_1_0_ FROM t_sys_node node0_ CROSS JOIN t_sys_entity entity1_ WHERE node0_.entity_id=entity1_.id AND entity1_.type='menu' ORDER BY node0_.id desc

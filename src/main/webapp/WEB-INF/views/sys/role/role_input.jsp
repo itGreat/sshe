@@ -16,12 +16,14 @@ $(function(){
 	},'text');
 });
 </script>
+<div id="role_box">
+
+<form id="js_saverole_fm" method="post" action="${ctx}/sys/role/save.action">
 <div id="js_rolenode_box" class="css_rolenode_div">
 		asdfs
-	<ul id="js_node_tree" class="easyui-tree" data-options="url:'${ctx}/sys/role/tree.action',method:'post',animate:true,checkbox:true">
+	<ul id="js_node_tree" class="easyui-tree" data-options="url:'${ctx}/sys/role/tree.action?id=${model.id }',method:'post',animate:true,checkbox:true">
 	</ul>
 </div>	
-<form id="js_saverole_fm" method="post" action="${ctx}/sys/role/save.action">
 	 <input type="hidden" name="role.id" value="${model.id }"/>
 		<table id="add_role_tb" class="css_role_tb css_fm_tb">
 			<tr class="table_row3">
@@ -40,3 +42,4 @@ $(function(){
 			<input value="保存" style="" type="button" onclick="saveRole();" />
 		</center>
 	</form>
+</div>
