@@ -1,7 +1,9 @@
 package com.gc.sys.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,10 @@ import org.springframework.util.CollectionUtils;
 import com.gc.common.Criteria;
 import com.gc.sys.dao.IEntityDao;
 import com.gc.sys.dao.INodeDao;
+import com.gc.sys.dao.IRoleDao;
 import com.gc.sys.entity.Entity;
 import com.gc.sys.entity.Node;
+import com.gc.sys.entity.Role;
 import com.gc.sys.service.INodeService;
 
 /**
@@ -27,7 +31,9 @@ public class NodeServiceImpl implements INodeService{
 	private INodeDao nodeDao;
 	@Autowired
 	private IEntityDao entityDao;
-
+	@Autowired
+	private IRoleDao roleDao;
+	
 	@Override
 	public String loadTree() {
 		String str = null;
@@ -52,16 +58,15 @@ public class NodeServiceImpl implements INodeService{
 		}
 		return str;
 	}
-	
 	private String getJsonStr(Node node){
 		StringBuffer buf=new StringBuffer();
 		buf.append("\"id\":\""+node.getId()+"\"");
 		buf.append(",\"text\":\""+node.getName()+"\"");
-		/*String stats = CollectionUtils.isEmpty(node.getChildren()) ? "closed" : "open";
-		buf.append(", \"state\": \""+stats+"\" ");*/
 		buf.append(",\"attributes\":{");
 		String url = null != node.getEntity() ? node.getEntity().getValue() : "";
+		String entityId = null != node.getEntity() ? node.getEntity().getId() : "";
 		buf.append("\"url\":\""+url+"\"");
+		buf.append(",\"entityId\":\""+entityId+"\"");
 		buf.append("}");
 		return buf.toString();
 	}
@@ -86,6 +91,79 @@ public class NodeServiceImpl implements INodeService{
 		}
 		return buf.toString();
 	}
+	
+	
+	public String loadTree(String roleId) {
+		Role role = roleDao.get(roleId);
+		//将原功能实体分装成map
+		Set<Entity> entities = role.getEntities();
+		Map<String,Entity> map = new HashMap<String, Entity>(entities.size());
+		for (Entity entity : entities) {
+			map.put(entity.getId(), entity);
+		}
+		String str = null;
+		StringBuffer hql = new StringBuffer();
+		hql.append("select t from Node t where t.parent.id is null ");
+		List<Node> list = nodeDao.find(hql.toString());
+		if(!CollectionUtils.isEmpty(list)){
+			StringBuffer buf=new StringBuffer("[");
+			boolean notFirst=false;
+			for (Node node : list) {
+				if(notFirst){
+					buf.append(",");
+				}
+				buf.append("{");
+				buf.append(getJsonStr(node,map));
+				buf.append(getChildDepart(node,map));
+				buf.append("}");
+				notFirst=true;
+			}
+			buf.append("]");
+			str = buf.toString();
+		}
+		return str;
+	}
+	
+	private String getJsonStr(Node node,Map<String,Entity> map){
+		String url = null != node.getEntity() ? node.getEntity().getValue() : "";
+		String entityId = null != node.getEntity() ? node.getEntity().getId() : "";
+		StringBuffer buf=new StringBuffer();
+		buf.append("\"id\":\""+node.getId()+"\"");
+		buf.append(",\"text\":\""+node.getName()+"\"");
+		Entity entity = map.get(entityId);
+		if(null != entity){
+			buf.append(",\"checked\":true");
+		}
+		buf.append(",\"attributes\":{");
+		buf.append("\"url\":\""+url+"\"");
+		buf.append(",\"entityId\":\""+entityId+"\"");
+		buf.append("}");
+		return buf.toString();
+	}
+	
+	
+	private String getChildDepart(Node node,Map<String,Entity> map){
+		StringBuffer buf=new StringBuffer();
+		if(!CollectionUtils.isEmpty(node.getChildren())){
+			buf.append(",\"children\":[");
+			//查询下一个记录
+			int i=0;
+			for (Node node_ : node.getChildren()) {
+				if(i==1){
+					buf.append(",");
+				}
+				buf.append("{");
+				buf.append(getJsonStr(node_,map));
+				buf.append(getChildDepart(node_,map));
+				i=1;
+				buf.append("}");
+			}
+			buf.append("]");
+		}
+		return buf.toString();
+	}
+	
+	
 
 	@Override
 	public List<Map<String, Object>> loadDataByCriteria(Criteria criteria) {

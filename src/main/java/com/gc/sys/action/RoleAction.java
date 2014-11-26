@@ -109,12 +109,12 @@ public class RoleAction extends CrudActionSupport<Role>{
 		HttpServletResponse response = Struts2Utils.getResponse();
 		response.setContentType("text/plain; charset=utf-8"); //指定文本类型
 		PrintWriter out = response.getWriter();
-		Role role = roleService.get(id);
-		Set<Entity> entities = role.getEntities();
-		String str = nodeService.loadTree();
-		for (Entity entity : entities) {
-			str = str.replace("\"id\":\""+entity.getId()+"\"", "\"id\":\""+entity.getId()+"\",\"checked\":true");
-		}
+		String str = nodeService.loadTree(id);
+//		Role role = roleService.get(id);
+//		Set<Entity> entities = role.getEntities();
+//		for (Entity entity : entities) {
+//			str = str.replace("\"id\":\""+entity.getId()+"\"", "\"id\":\""+entity.getId()+"\",\"checked\":true");
+//		}
 		log.info(str);
 		out.print(str);
 		out.close();

@@ -20,4 +20,6 @@ public interface INodeService {
 
 	List<Map<String, Object>> getNodes();
 
+	String loadTree(String id);
+
 }

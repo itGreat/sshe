@@ -30,7 +30,7 @@
 <%-- 部门树 --%>
 <div class="div_left">
 	<div class="css_title">菜单树</div>
-    <ul id="js_node_tree" class="easyui-tree" data-options="url:'${ctx}/sys/role/tree.action',method:'post',animate:true">
+    <ul id="js_node_tree" class="easyui-tree" data-options="url:'${ctx}/sys/node/tree.action',method:'post',animate:true">
     </ul>
 </div>
 <div class="div_right">
@@ -78,7 +78,7 @@ $(function(){
 				var data = {id:id};
 				$.post(url,data,function(result){
 					if(result == '1'){
-						alert('操作成功!');
+// 						alert('操作成功!');
 						$('#js_node_tree').tree('reload');
 					}else{
 						alert('操作失败!');

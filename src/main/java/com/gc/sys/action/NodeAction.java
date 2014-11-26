@@ -1,5 +1,6 @@
 package com.gc.sys.action;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -95,6 +96,17 @@ public class NodeAction extends CrudActionSupport<Node>{
 		return SUCCESS;
 	}
 
+	@Action(value="tree")
+	public void tree() throws IOException{
+		HttpServletResponse response = Struts2Utils.getResponse();
+		response.setContentType("text/plain; charset=utf-8"); //指定文本类型
+		PrintWriter out = response.getWriter();
+		String str = nodeService.loadTree();
+		log.info(str);
+		out.print(str);
+		out.close();
+	}
+	
 	@Override
 	@Action(value="save")
 	public String save() throws Exception {
