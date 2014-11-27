@@ -1,11 +1,21 @@
 package com.gc.sys.action;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gc.sys.entity.Entity;
+import com.gc.sys.entity.Role;
+import com.gc.sys.entity.User;
+import com.gc.sys.service.IUserService;
+import com.gc.util.Struts2Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -21,6 +31,8 @@ public class LoginAction extends ActionSupport{
 	private String username;
 	private String password;
 	
+	@Autowired
+	private IUserService userService;
 	
 	/**
 	 * @author gongchang
@@ -32,10 +44,17 @@ public class LoginAction extends ActionSupport{
 			@Result(name=LOGIN,type="redirect",location="login.action"),
 		})
 	public String cklogin(){
-		 String _username = "admin";
-		 String _password = "admin";
 		 if(StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(password)){
-			 if(username.equals(_username) && password.equals(_password)){
+			 User user = userService.getByUsername(username);
+			 if(null != user && password.equals(user.getPassword())){
+				 Set<Role> roles = user.getRoles();
+				 Map<String,Boolean> map = new HashMap<String, Boolean>();
+				 for (Role role : roles) {
+					for (Entity entity : role.getEntities()) {
+						map.put(entity.getValue(), true);
+					}
+				 }
+				 Struts2Utils.getSession().setAttribute("entityMap", map);
 				 return SUCCESS;
 			 }else{
 				 return LOGIN;

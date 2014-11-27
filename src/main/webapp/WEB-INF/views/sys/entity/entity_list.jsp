@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/commons/include.jsp"%>
+<%@ include file="/WEB-INF/views/commons/tags.jsp"%>
 
 <!--  <div id="toolbar">
 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加</a> 

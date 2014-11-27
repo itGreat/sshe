@@ -11,6 +11,11 @@ SELECT * FROM t_sys_dept;
 SELECT * FROM t_sys_node;
 
 SELECT * FROM t_sys_role_entity;
+DELETE FROM t_sys_role_entity
+
+SELECT * FROM t_sys_node t WHERE t.id  
+IN ('2','402881eb49dcb7b70149dcd51d6f0001','3','5','402881eb49dc84ad0149dc87567e0000','402881eb49dc84ad0149dc8756b50001','402881eb49dc84ad0149dc8758300002')
+
 
 /***** insert *****/
 -- insert user

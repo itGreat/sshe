@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/commons/include.jsp" %>
+<%@ include file="/WEB-INF/views/commons/tags.jsp" %>
 <form id="node_form" method="post" action="${ctx}/sys/node/save.action">
 	<input type="hidden" name="node.id" value="${model.id }"/>
 	<table id="add_node_tb" class="css_node_tb css_fm_tb">

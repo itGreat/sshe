@@ -92,4 +92,9 @@ public class UserServiceImpl implements IUserService {
 		userDao.delete(user);
 	}
 
+	@Override
+	public User getByUsername(String username) {
+		return userDao.getByUsername(username);
+	}
+
 }

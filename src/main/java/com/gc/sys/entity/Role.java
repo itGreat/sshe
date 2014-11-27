@@ -1,5 +1,6 @@
 package com.gc.sys.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class Role extends ID {
 	/**
 	 * 角色对应实体
 	 */
-	private Set<Entity> entities;
+	private Set<Entity> entities = new HashSet<Entity>(0);
 	
 	//辅助属性
 	private String entityIds;

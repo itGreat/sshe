@@ -27,7 +27,7 @@ public class UserDao extends BaseDaoImpl<User> implements IUserDao{
 	@Override
 	public User getByUsername(String username) {
 		StringBuffer  hql = new StringBuffer();
-		hql.append(" select t from User t where t.username = "+username+" ");
+		hql.append(" select t from User t where t.username = '"+username+"' ");
 		Session session = getCurrentSession();
 		Query query = session.createQuery(hql.toString());
 		List<User> list = query.list();

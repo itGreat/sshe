@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/commons/include.jsp" %>
+<%@ include file="/WEB-INF/views/commons/tags.jsp" %>
 <!DOCTYPE HTML >
 <html>
 <head>
@@ -30,7 +30,7 @@
 	<div data-options="region:'west'" style="width:200px;">
 		<%-- 手风琴组件菜单 --%>
 		<div class="easyui-accordion" >
-			<div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:10px;">
+			<div title="后台管理" data-options="iconCls:'icon-search'" style="padding:10px;">
 			<%-- 树 --%>
 			<ul id="js_sys_tree">
 			</ul>
