@@ -7,6 +7,8 @@
 SELECT * FROM t_sys_user;
 SELECT * FROM t_sys_role;
 SELECT * FROM t_sys_entity;
+
+SELECT * FROM t_sys_entity t WHERE t.id = '40283a8148ab95520148ab95aaef0000'
 SELECT * FROM t_sys_dept;
 SELECT * FROM t_sys_dept t WHERE t.id = '40283a8148a561a40148a562d8220000'
 SELECT * FROM t_sys_node;
@@ -89,3 +91,4 @@ SELECT
     WHERE
         node0_.parent_id IS NULL
 
+/sys/entity/list.action

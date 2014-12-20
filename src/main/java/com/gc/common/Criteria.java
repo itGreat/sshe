@@ -37,6 +37,10 @@ public class Criteria {
 	private String url;
 	
 	/**
+	 * 值
+	 */
+	private String value;
+	/**
 	 * type 类型
 	 */
 	private String type;
@@ -121,5 +125,13 @@ public class Criteria {
 
 	public void setDeptId(String deptId) {
 		this.deptId = deptId;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 }

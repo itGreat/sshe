@@ -1,5 +1,6 @@
 package com.gc.sys.dao.impl;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import com.gc.sys.entity.Entity;
 @Repository
 public class EntityDao extends BaseDaoImpl<Entity> implements IEntityDao{
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Entity> findByUid(String id) {
 		StringBuffer sql = new StringBuffer();
@@ -31,4 +33,8 @@ public class EntityDao extends BaseDaoImpl<Entity> implements IEntityDao{
 		return null;
 	}
 
+	@Override
+	public Entity get(Serializable id) {
+		return (Entity)getCurrentSession().get(Entity.class, id);
+	}
 }

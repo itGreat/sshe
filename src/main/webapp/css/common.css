@@ -1,3 +1,4 @@
+/* table */
 .css_op_a{
 	text-decoration: none;
 }
@@ -12,4 +13,11 @@
 }
 .css_fm_tb .css_td_el{
 	width: 75%;
+}
+
+/* criteria */
+.div_criteria{
+	border: 1px solid blue;
+	padding-top:5px;
+	height: 30px;
 }
