@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="processEngineConfiguration"
+		class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+		<property name="databaseSchemaUpdate" value="true" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/act?createDatabaseIfNotExist=true" />
+		<property name="jdbcDriver" value="com.mysql.jdbc.Driver" />
+		<!-- <property name="jdbcUsername" value="sunit" />
+		<property name="jdbcPassword" value="sunit" /> -->
+		<property name="jdbcUsername" value="sshe" />
+		<property name="jdbcPassword" value="sshe" />
+		<property name="jobExecutorActivate" value="true" />
+		<property name="activityFontName" value="微软雅黑"/>  
+        <property name="labelFontName" value="微软雅黑"/> 
+	</bean>
+</beans>

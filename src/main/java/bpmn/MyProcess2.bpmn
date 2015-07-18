@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="holidayProcess" name="公司请假流程" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="startleave" name="申请调休"></userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="startleave"></sequenceFlow>
+    <userTask id="managercheck" name="经理审批" activiti:assignee="jshuz"></userTask>
+    <sequenceFlow id="flow2" sourceRef="startleave" targetRef="managercheck"></sequenceFlow>
+    <userTask id="bosscheck" name="老板审批" activiti:exclusive="false" activiti:assignee="tw"></userTask>
+    <sequenceFlow id="flow7" sourceRef="managercheck" targetRef="bosscheck"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow8" sourceRef="bosscheck" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_holidayProcess">
+    <bpmndi:BPMNPlane bpmnElement="holidayProcess" id="BPMNPlane_holidayProcess">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="122.0" y="30.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startleave" id="BPMNShape_startleave">
+        <omgdc:Bounds height="55.0" width="105.0" x="87.0" y="104.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="managercheck" id="BPMNShape_managercheck">
+        <omgdc:Bounds height="55.0" width="105.0" x="87.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="bosscheck" id="BPMNShape_bosscheck">
+        <omgdc:Bounds height="55.0" width="105.0" x="87.0" y="310.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="122.0" y="400.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="139.0" y="65.0"></omgdi:waypoint>
+        <omgdi:waypoint x="139.0" y="104.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="139.0" y="159.0"></omgdi:waypoint>
+        <omgdi:waypoint x="139.0" y="200.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="139.0" y="255.0"></omgdi:waypoint>
+        <omgdi:waypoint x="139.0" y="310.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="139.0" y="365.0"></omgdi:waypoint>
+        <omgdi:waypoint x="139.0" y="400.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

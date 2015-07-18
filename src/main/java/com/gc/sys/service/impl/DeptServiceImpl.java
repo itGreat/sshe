@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.gc.common.ValidateException;
+import com.gc.core.exception.ValidateException;
 import com.gc.sys.dao.IDeptDao;
 import com.gc.sys.dao.IUserDao;
-import com.gc.sys.entity.Dept;
-import com.gc.sys.entity.User;
+import com.gc.sys.po.Dept;
+import com.gc.sys.po.User;
 import com.gc.sys.service.IDeptService;
 
 /**

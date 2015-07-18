@@ -5,8 +5,9 @@ import java.io.Serializable;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import com.gc.core.dao.BaseDaoImpl;
 import com.gc.sys.dao.IDeptDao;
-import com.gc.sys.entity.Dept;
+import com.gc.sys.po.Dept;
 
 /**
  * @author gongchang

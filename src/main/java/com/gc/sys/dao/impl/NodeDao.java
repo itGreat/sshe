@@ -2,8 +2,9 @@ package com.gc.sys.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
+import com.gc.core.dao.BaseDaoImpl;
 import com.gc.sys.dao.INodeDao;
-import com.gc.sys.entity.Node;
+import com.gc.sys.po.Node;
 
 /**
  * @author gongchang

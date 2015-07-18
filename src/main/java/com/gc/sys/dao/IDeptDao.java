@@ -1,6 +1,6 @@
 package com.gc.sys.dao;
 
-import com.gc.sys.entity.Dept;
+import com.gc.sys.po.Dept;
 
 /**
  * @author gongchang

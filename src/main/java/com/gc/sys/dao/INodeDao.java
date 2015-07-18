@@ -1,6 +1,6 @@
 package com.gc.sys.dao;
 
-import com.gc.sys.entity.Node;
+import com.gc.sys.po.Node;
 
 /**
  * @author gongchang

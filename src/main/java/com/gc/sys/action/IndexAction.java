@@ -13,8 +13,8 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gc.core.util.Struts2Utils;
 import com.gc.sys.service.INodeService;
-import com.gc.util.Struts2Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")

@@ -9,8 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
+import com.gc.core.dao.BaseDaoImpl;
 import com.gc.sys.dao.IEntityDao;
-import com.gc.sys.entity.Entity;
+import com.gc.sys.po.Entity;
 
 /**
  * @author gongchang

@@ -8,8 +8,9 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
+import com.gc.core.dao.BaseDaoImpl;
 import com.gc.sys.dao.IUserDao;
-import com.gc.sys.entity.User;
+import com.gc.sys.po.User;
 
 /**
  * @author gongchang

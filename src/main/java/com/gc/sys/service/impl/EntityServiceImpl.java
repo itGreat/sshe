@@ -7,10 +7,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gc.common.ValidateException;
+import com.gc.core.exception.ValidateException;
 import com.gc.sys.common.EntityCriteria;
 import com.gc.sys.dao.IEntityDao;
-import com.gc.sys.entity.Entity;
+import com.gc.sys.po.Entity;
 import com.gc.sys.service.IEntityService;
 
 /**

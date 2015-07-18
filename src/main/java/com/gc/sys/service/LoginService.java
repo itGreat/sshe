@@ -7,12 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gc.core.util.Struts2Utils;
 import com.gc.sys.common.Constants;
 import com.gc.sys.dao.IEntityDao;
 import com.gc.sys.dao.IUserDao;
-import com.gc.sys.entity.Entity;
-import com.gc.sys.entity.User;
-import com.gc.util.Struts2Utils;
+import com.gc.sys.po.Entity;
+import com.gc.sys.po.User;
 
 /**
  * @author gongchang

@@ -2,7 +2,7 @@ package com.gc.sys.dao;
 
 import java.util.List;
 
-import com.gc.sys.entity.User;
+import com.gc.sys.po.User;
 
 /**
  * @author gongchang

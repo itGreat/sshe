@@ -1,6 +1,6 @@
 package com.gc.sys.common;
 
-import com.gc.common.Criteria;
+import com.gc.core.criteria.Criteria;
 
 /**
  * @author gongchang

@@ -20,13 +20,13 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gc.common.Criteria;
+import com.gc.core.criteria.Criteria;
+import com.gc.core.util.Struts2Utils;
 import com.gc.sys.common.UserCriteria;
-import com.gc.sys.entity.Dept;
-import com.gc.sys.entity.User;
+import com.gc.sys.po.Dept;
+import com.gc.sys.po.User;
 import com.gc.sys.service.IDeptService;
 import com.gc.sys.service.IUserService;
-import com.gc.util.Struts2Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**

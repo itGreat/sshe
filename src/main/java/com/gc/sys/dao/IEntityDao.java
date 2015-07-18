@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.gc.sys.entity.Entity;
+import com.gc.sys.po.Entity;
 
 /**
  * @author gongchang

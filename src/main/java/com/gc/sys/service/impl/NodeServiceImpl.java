@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.gc.sys.dao.INodeDao;
-import com.gc.sys.entity.Node;
+import com.gc.sys.po.Node;
 import com.gc.sys.service.INodeService;
 
 /**

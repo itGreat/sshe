@@ -14,11 +14,11 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gc.common.CrudActionSupport;
+import com.gc.core.action.CrudActionSupport;
+import com.gc.core.util.Struts2Utils;
 import com.gc.sys.common.EntityCriteria;
-import com.gc.sys.entity.Entity;
+import com.gc.sys.po.Entity;
 import com.gc.sys.service.IEntityService;
-import com.gc.util.Struts2Utils;
 
 @SuppressWarnings("serial")
 @Namespace(value="/sys/entity")

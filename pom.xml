@@ -8,7 +8,7 @@
 	<name />
 	<description />
 
-	<!-- 指定Maven仓库 -->
+	<!-- 指定Maven仓库 --> 
 	<repositories>
 		<repository>
 			<id>maven</id>
@@ -37,6 +37,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
+		<!-- activiti -->
+	  	<dependency>
+		    <groupId>org.activiti</groupId>
+		    <artifactId>activiti-engine</artifactId>
+		    <version>5.14</version>
+		</dependency>
 		<!-- jstl -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

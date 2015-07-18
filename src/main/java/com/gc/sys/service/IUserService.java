@@ -1,8 +1,9 @@
 package com.gc.sys.service;
 
 import java.util.List;
+
 import com.gc.sys.common.UserCriteria;
-import com.gc.sys.entity.User;
+import com.gc.sys.po.User;
 
 public interface IUserService {
 

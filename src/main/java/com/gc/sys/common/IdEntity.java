@@ -9,14 +9,16 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-public abstract class IdEntity implements Serializable {
+import com.gc.core.po.ID;
+
+public abstract class IdEntity extends ID implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6743002931682238932L;
 	
-	protected Long id;
+//	protected Long id;
 
 	/**
 	数据库表ID生成方式
@@ -29,7 +31,7 @@ public abstract class IdEntity implements Serializable {
 					allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.TABLE,generator="A_ID_GENERATOR")
 	 */
-	@Id
+	/*@Id
 	@Column(name="Id", length=25)
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "TimeIDGenerator")
 	@GenericGenerator(name = "TimeIDGenerator", strategy = "com.gc.common.TimeIDGeneratorLong")
@@ -39,5 +41,5 @@ public abstract class IdEntity implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
+	}*/
 }
