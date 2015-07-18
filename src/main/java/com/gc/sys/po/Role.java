@@ -1,5 +1,6 @@
 package com.gc.sys.po;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -34,7 +36,10 @@ public class Role extends ID {
 	/**
 	 * 角色对应实体
 	 */
-	private Set<Entity> entities;
+	private Set<Entity> entities = new HashSet<Entity>(0);
+	
+	//辅助属性
+	private String entityIds;
 
 	@Column
 	public String getName() {
@@ -64,5 +69,15 @@ public class Role extends ID {
 
 	public void setEntities(Set<Entity> entities) {
 		this.entities = entities;
+	}
+
+	
+	@Transient
+	public String getEntityIds() {
+		return entityIds;
+	}
+
+	public void setEntityIds(String entityIds) {
+		this.entityIds = entityIds;
 	}
 }

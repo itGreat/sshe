@@ -1,5 +1,6 @@
 package com.gc.sys.po;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -47,7 +48,7 @@ public class User extends UndeleteEntity{
 	/**
 	 * 拥有角色
 	 */
-	private Set<Role> roles;
+	private Set<Role> roles = new HashSet<Role>(0);
 
 	@Column(length=100)
 	public String getName() {

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/commons/include.jsp" %>
-<link href="${ctx}/css/sys/userdept/main.css" rel="stylesheet" type="text/css"></link>
+<%@ page import="java.util.*" %>
+<%@ include file="/WEB-INF/views/commons/tags.jsp" %>
+<% Map<String,Boolean> entityMap = (Map<String,Boolean>)session.getAttribute("entityMap");%>
+<link href="${ctx}/css/sys/userdept_main.css" rel="stylesheet" type="text/css"></link>
 <script src="${ctx}/js/sys/userdept/main.js" type="text/javascript"></script>
 <style type="text/css">
 
 </style>
-<div id="js_ud_dialog" style="display: none;"  data-options="iconCls:'icon-save',resizable:true,modal:true"></div>
-<jsp:include page="../comm/radio_dept.jsp"/>
 <%-- 部门树 --%>
 <div class="div_left">
 	<div class="css_title">部门树</div>
@@ -35,6 +35,5 @@
 	<table id="js_user_tb"></table>
 	</div>
 </div>
-<script>
-
-</script>
+<div id="js_ud_dialog" ></div>
+<jsp:include page="../comm/radio_dept.jsp"/>

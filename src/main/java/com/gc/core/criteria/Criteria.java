@@ -46,6 +46,11 @@ public class Criteria {
 	private String type;
 	
 	/**
+	 * 值
+	 */
+	private String value;
+	
+	/**
 	 * 状态
 	 */
 	private String state;

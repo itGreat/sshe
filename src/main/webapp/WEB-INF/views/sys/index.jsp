@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/commons/include.jsp" %>
+<%@ include file="/WEB-INF/views/commons/tags.jsp" %>
 <!DOCTYPE HTML >
 <html>
 <head>
@@ -12,10 +12,12 @@
 <link href="${ctx}/scripts/jquery-easyui-1.3.1/themes/default/easyui.css" rel="stylesheet" type="text/css"></link>
 <link href="${ctx}/scripts/jquery-easyui-1.3.1/themes/icon.css" rel="stylesheet" type="text/css"></link>
 <link href="${ctx}/css/common.css" rel="stylesheet" type="text/css"></link>
+<link href="${ctx}/css/sys/content.css" rel="stylesheet" type="text/css"></link>
 
 <script src="${ctx}/scripts/jquery-easyui-1.3.1/jquery-1.8.0.min.js" type="text/javascript"></script>
 <script src="${ctx}/scripts/jquery-easyui-1.3.1/jquery.easyui.min.js" type="text/javascript"></script>
 <script src="${ctx}/scripts/jquery-easyui-1.3.1/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+<script src="${ctx}/scripts/jqUtil.js" type="text/javascript"></script>
 <script src="${ctx}/js/sys/index.js" type="text/javascript"></script>
 <style type="text/css">
  
@@ -28,7 +30,7 @@
 	<div data-options="region:'west'" style="width:200px;">
 		<%-- 手风琴组件菜单 --%>
 		<div class="easyui-accordion" >
-			<div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:10px;">
+			<div title="后台管理" data-options="iconCls:'icon-search'" style="padding:10px;">
 			<%-- 树 --%>
 			<ul id="js_sys_tree">
 			</ul>
@@ -43,19 +45,36 @@
  <script type="text/javascript">
  var ctx = "${ctx}";
  
- function addTab(title,html){
-	 $('#js_sys_tabs').tabs('add',{
-		 title:title,
-		 content:html,
-		 closable:true,
-		 tools:[{
-		 iconCls:'icon-mini-refresh',
-		 handler:function(){
-		 alert('refresh');
-		 }
-		 }]
-		 });
- }
+ function openTab(title,url){
+	 var $tabs = $('#js_sys_tabs');
+	if ($tabs.tabs('exists',title)){
+		$tabs.tabs('select', title);
+		var tab = $tabs.tabs('getSelected');
+		$tabs.tabs('update', {
+			tab: tab,
+			options: {title: title,href: url}
+		});
+	} else {
+    	var data = {};
+   	    $.post(url,data,function(result){
+   	    	$tabs.tabs('add',{
+				title:title,
+				content:result,
+				closable:true,
+				tools:[{
+				iconCls:'icon-mini-refresh',
+				handler:function(){
+					var tab = $tabs.tabs('getSelected');
+					$tabs.tabs('update', {
+						tab: tab,
+						options: {title: title,href: url}
+					});
+				}
+				}]
+				});
+    	},'html'); 
+	}
+}
  </script>
 </body>
 </html>
